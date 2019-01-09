@@ -1,1 +1,1 @@
-To install run 'make' follwed by 'sudo make install'
+To install run 'make' followed by 'sudo make install'
