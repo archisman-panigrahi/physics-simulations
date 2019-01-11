@@ -43,7 +43,7 @@ void main()
 		t = t + delta_t;
 		a = -((b * v) + (k * x));
 		x = x + (v * delta_t) + ((a * delta_t * delta_t)/2);
-		v = v + (a * delta_t);
+		v = v + (a * delta_t) - (((b * a) + (k * v)) * (delta_t * delta_t)/2);
 		printf("%Lf \t %Lf \t %Lf\n", i,t,x); //step	t    x
 	}
 	printf("x is %Lf at t = %Lf\n", x, t_f);
