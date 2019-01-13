@@ -15,7 +15,7 @@ void main()
 	scanf("%Lf", &m);
 	printf("Enter value of t to calculate x for:	");
 	scanf("%Lf", &t_f);
-	printf("Enter no of interations:	");
+	printf("Enter no of iterations:	");
 	scanf("%Lf", &iterations);
 	x = x_0;
 	v = v_0;
@@ -31,7 +31,7 @@ void main()
 		for (i = 0; i < iterations; i++)
 		{
 			t = t + delta_t;
-			x = x - ((k/b) * delta_t);
+			x = x - ((k/b) * x * delta_t);
 			printf("%Lf \t %Lf \t %Lf\n", i,t,x); //step	t    x
 		}
 		printf("x is %Lf at t = %Lf\n", x, t_f);
