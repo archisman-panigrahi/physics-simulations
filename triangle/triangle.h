@@ -1,5 +1,5 @@
-#ifndef _insertsion_sort_h
-#define _insertsion_sort_h
+#ifndef _triangle_h
+#define _triangle_h
 //This function takes three side lengths, 
 //address of three angles and address of area
 //as input and changes the values of angles and area
