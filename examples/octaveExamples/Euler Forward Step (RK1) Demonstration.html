@@ -1,0 +1,108 @@
+
+<!-- saved from url=(0054)http://iap.iisc.ac.in/~amohanty/DS289/demoNoPar01.html -->
+<html class="gr__iap_iisc_ac_in"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>
+Euler Forward Step (RK1) Demonstration
+</title>
+</head>
+<body data-gr-c-s-loaded="true">
+<h3>
+Euler Forward Step (RK1) Demonstration
+</h3>
+
+<p>
+</p><div style="background-color:#FF8080;font-size:20px;width:800px;">
+File stepRK1_np.m
+</div>
+
+<pre>function ynext = stepRK1_np(h, x, y, fName)
+    k = h * feval(fName, x, y);
+    ynext = y + k;
+</pre>
+
+<p>
+</p><div style="background-color:#80C080;font-size:20px;width:800px;">
+File fn.m
+</div>
+
+<pre>function s = fn(t, u)
+    s = u;
+</pre>
+
+<p>
+</p><div style="background-color:#80C0C0;font-size:20px;width:800px;">
+File fnOsc.m
+</div>
+
+<pre>function s = fnOsc(t, u)
+    s = [u(2); -u(1)];
+</pre>
+
+<p>
+</p><div style="background-color:#80FF80;font-size:20px;width:800px;">
+File demoRK1.m
+</div>
+
+<pre>function demoRK1(tf, nsteps)
+    tstep = tf / nsteps;
+    t = linspace(0, tf, nsteps + 1);
+
+    u = zeros(size(t));
+    u(1) = 1.0;
+
+    for k=1:nsteps
+        u(k+1) = stepRK1_np(tstep, t(k), u(k), 'fn');
+    end
+
+    utrue = exp(t);
+    figure(1);
+    plot(t, u, '-r;Euler Forward;', t, utrue, '-g;Exact;');
+    figure(2);
+    plot(t, utrue - u, '-r;Error;');
+</pre>
+
+<p>
+</p><div style="background-color:#80FFFF;font-size:20px;width:800px;">
+File demoOscRK1.m
+</div>
+
+<pre>function demoOscRK1(tf, nsteps)
+    tstep = tf / nsteps;
+    t = linspace(0, tf, nsteps + 1);
+
+    xRK = zeros(size(t));
+    u = [1.0; 0.0];
+    xRK(1) = u(1);
+    for k=1:nsteps
+        uNext = stepRK1_np(tstep, t(k), u, 'fnOsc');
+        u = uNext;
+        xRK(k+1) = u(1);
+    end
+
+    xExact = cos(t);
+    figure(1);
+    plot(t, xRK, '-g;Euler Forward;', t, xExact, '-k;Exact;');
+    grid on;
+    figure(2);
+    plot(t, xExact - xRK, '-r;Error;');
+    grid on;
+</pre>
+
+<hr>
+
+<div style="background-color:#808080;font-size:20px;width:800px;">
+Try the following from the Octave command line.
+</div>
+
+<ul>
+    <li> demoRK1(2, 10)
+    </li><li> demoRK1(2, 100)
+
+    </li><li> demoOscRK1(15, 30)
+    </li><li> demoOscRK1(15, 300)
+    </li><li> demoOscRK1(15, 1200)
+</li></ul>
+
+
+
+</body></html>
