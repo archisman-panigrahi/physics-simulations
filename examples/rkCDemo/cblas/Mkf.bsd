@@ -1,0 +1,25 @@
+CC=gcc -Wall
+
+LIBS= -lcblas -lblas -lg2c -lm
+
+LIBFLG = -L/usr/lib -L/usr/local/lib
+
+all: msd.exe coupledMassSpring.exe pendulumMotion.exe
+
+.c.o:
+	$(CC) -c -I/usr/local/include $<
+
+msd.exe: msd.o ode.o
+	$(CC) -o $@ $+ $(LIBFLG) $(LIBS)
+
+coupledMassSpring.exe: coupledMassSpring.o ode.o
+	$(CC) -o $@ $+ $(LIBFLG) $(LIBS)
+
+pendulumMotion.exe: pendulumMotion.o ode.o
+	$(CC) -o $@ $+ $(LIBFLG) $(LIBS)
+
+clean:
+	$(RM) *.o *.exe a.out
+
+scrub: clean
+	$(RM) *.dat
