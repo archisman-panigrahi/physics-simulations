@@ -82,12 +82,12 @@ void stepRK4(double x, double *y, int m,
     (*f)(x, y, m, udat, S); /* S is now S1 */ //k1 = f(x,y) is evaluated and saved in S
     cblas_daxpy(m, h/6.0, S, 1, yNext, 1); //yNext is y + h/6 * k1
     cblas_dcopy(m, y, 1, ytmp, 1); // ytmp is y
-    cblas_daxpy(m, 0.5*h, S, 1, ytmp, 1); // ytmp is y + 0.5*h*k1
-    (*f)(x+0.5*h, ytmp, m, udat, S); /* S is now S2 */ //k2 = f(x + h/2,y + k1/2) is evaluated and saved in S
+    cblas_daxpy(m, 0.5*h, S, 1, ytmp, 1); // ytmp is y + h/2 * k1
+    (*f)(x+0.5*h, ytmp, m, udat, S); /* S is now S2 */ //k2 = f(x + h/2,y + k1 /2) is evaluated and saved in S
     cblas_daxpy(m, h/3.0, S, 1, yNext, 1); //yNext is y + h/6 * k1 + h/3 * k2 
     cblas_dcopy(m, y, 1, ytmp, 1); //ytmp is y
     cblas_daxpy(m, 0.5*h, S, 1, ytmp, 1); // ytmp is y + h/2 * k2
-    (*f)(x+0.5*h, ytmp, m, udat, S); /* S is now S3 */ //k3 = f(x + h/2, y + k2/2) is evaluated and saved in S
+    (*f)(x+0.5*h, ytmp, m, udat, S); /* S is now S3 */ //k3 = f(x + h/2, y + k2 /2) is evaluated and saved in S
     cblas_daxpy(m, h/3.0, S, 1, yNext, 1); //yNext is y + h/6 * k1 + h/3 * k2 + h/3 * k3
     cblas_dcopy(m, y, 1, ytmp, 1); //ytmp is y
     cblas_daxpy(m, h, S, 1, ytmp, 1); //ytmp is y + h * k3
