@@ -1,6 +1,4 @@
 #include <math.h>
-#include "am.h"
-#include "gm.h"
 #include "Iab.h"
 
 double Iab(double a, double b)
@@ -12,8 +10,8 @@ double Iab(double a, double b)
 	for (i = 0; i < 15; ++i)
 	{
 		c = d;
-		d = am(d,e);
-		e = gm(c,e);
+		d = (d+e)/2;
+		e = sqrt(c*e);
 	}
 	return (M_PI/(2*d));
 }

@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include "Iab.h"
 
-
-
 int main(int argc, char const *argv[])
 {
 	double a,b;

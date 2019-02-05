@@ -6,6 +6,7 @@
 int main(int argc, char const *argv[])
 {
 	double a,i;
+	FILE *data;
 	a = 100;
 	if (argc > 1)
 	{
@@ -16,10 +17,11 @@ int main(int argc, char const *argv[])
 			a = 100;
 		}
 	}
-	printf("x\tK(x)\n");
+	data = fopen("data.csv","w+");
+	fprintf(data, "x\tK(x)\n");
 	for (i = 0; i < a; ++i)
 	{
-		printf("%lf\t%.16lf\n", i/a, ellipticK(i/a));
+		fprintf(data, "%lf\t%.16lf\n", i/a, ellipticK(i/a));
 	}
 	return 0;
 }
