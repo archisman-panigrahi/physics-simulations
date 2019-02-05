@@ -21,7 +21,7 @@ int main(int argc, char const *argv[])
 	fprintf(data, "x\tK(x)\n");
 	for (i = 0; i < a; ++i)
 	{
-		fprintf(data, "%lf\t%.16lf\n", i/a, ellipticK(i/a));
+		fprintf(data, "%.16lf\t%.16lf\n", i/a, ellipticK(i/a));
 	}
 	return 0;
 }

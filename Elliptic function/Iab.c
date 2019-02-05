@@ -3,6 +3,10 @@
 
 double Iab(double a, double b)
 {
+	if (a == b)
+	{
+		return (M_PI/(2*a));
+	}
 	int i;
 	double c,d,e;
 	d = a;
