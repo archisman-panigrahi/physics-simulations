@@ -1,16 +1,20 @@
 CC = gcc -Wall
 
 LIBS = -lm
+FLAG = -m32
 
-all: main.exe Iab.o ellipticfnprinter.exe
+all: main.exe ellint.o ellipticfnprinter.exe agm.o
 
-Iab.exe: Iab.o
+agm.exe: agm.o
 	$(CC) -o $@ $+ $(LIBS)
 
-main.exe: Iab.o main.o
+ellint.exe: ellint.o agm.o
 	$(CC) -o $@ $+ $(LIBS)
 
-ellipticfnprinter.exe: Iab.o ellipticfnprinter.o
+main.exe: ellint.o main.o agm.o
+	$(CC) -o $@ $+ $(LIBS)
+
+ellipticfnprinter.exe: ellint.o ellipticfnprinter.o agm.o
 	$(CC) -o $@ $+ $(LIBS)
 
 clean:

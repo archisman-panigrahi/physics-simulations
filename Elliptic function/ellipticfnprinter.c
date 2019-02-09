@@ -1,7 +1,8 @@
 #include <math.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "Iab.h"
+#include "ellint.h"
+#include "agm.h"
 
 int main(int argc, char const *argv[])
 {
@@ -21,7 +22,7 @@ int main(int argc, char const *argv[])
 	fprintf(data, "x\tK(x)\n");
 	for (i = 0; i < a; ++i)
 	{
-		fprintf(data, "%.16lf\t%.16lf\n", i/a, ellipticK(i/a));
+		fprintf(data, "%.16lf\t%.16lf\n", i/a, ellipK(i/a));
 	}
 	return 0;
 }

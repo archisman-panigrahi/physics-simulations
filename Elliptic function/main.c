@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include "Iab.h"
+#include "ellint.h"
+#include "agm.h"
 
 int main(int argc, char const *argv[])
 {
@@ -24,7 +25,7 @@ int main(int argc, char const *argv[])
 			printf("Error k=%lf, which should be less than 1\n", b);
 			return 0;
 		}
-		printf("K(%lf) = %.16lf\n", b, ellipticK(b));
+		printf("K(%lf) = %.16lf\n", b, ellipK(b));
 		return 0;
 	}
 	printf("a=%lf, b=%lf\n", a,b);
