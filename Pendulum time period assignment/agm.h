@@ -5,7 +5,7 @@
 extern "C" {
 #endif
 
-double agm(double, double);
+double agm(double, double); //returns the agm of two numbers
 
 #ifdef __cplusplus
 }

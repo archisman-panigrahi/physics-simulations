@@ -6,7 +6,7 @@ extern "C" {
 #endif
 
 double Iab(double, double); //these two numbers should be non-negative
-double ellipK(double);
+double ellipK(double); //returns the value of complete elliptic integral of first kind of any number of magnitude less than 1
 
 #ifdef __cplusplus
 }
