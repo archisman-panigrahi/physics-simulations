@@ -33,17 +33,19 @@ int main(int argc, char *argv[])
     {
         theta0_deg = atof(argv[1]);
         if (theta0_deg < 0)
+        {
             theta0_deg = -(theta0_deg);
-        if(theta0_deg > 180)
+        }
+        else if(theta0_deg > 180)
         {
             printf("Initial angle should be less than or equal to 180 degree\n");
-            printf("Type pendulum_time_period angle(in degree) L(optional) g(optional)\n");
+            printf("Type ./pendulum_time_period angle(in degree) L(optional) g(optional)\n");
             return 0;
         }
         else if(theta0_deg == 0)
         {
             printf("Pendulum won't move\n");
-            printf("Type pendulum_time_period angle(in degree) L(optional) g(optional)\n");
+            printf("Type ./pendulum_time_period angle(in degree) L(optional) g(optional)\n");
             return 0;
         }
     }
@@ -70,7 +72,7 @@ int main(int argc, char *argv[])
         {	
         	if (y[0] > 0)
         		{
-        			Tnum = (t) + (y[0] * tStep/(y[0]-ynext[0]));
+        			Tnum = 4 * ((t) + (y[0] * tStep/(y[0]-ynext[0])));
         			break;
         		}
         }
@@ -81,9 +83,9 @@ int main(int argc, char *argv[])
     }
     Texact = 4*ellipK(sin(theta0/2))/omega0;
     printf("\ntheta0 = %lf degree\n", theta0_deg);
-    printf("Numeric time period = %.16lf s\n", 4*Tnum);
+    printf("Numeric time period = %.16lf s\n", Tnum);
     printf("Analytic time period = %.16lf s\n", Texact);
-    printf("Error (Numeric - Analytic) = %.16g s\n", (4 * Tnum) - Texact);
+    printf("Error (Numeric - Analytic) = %.16g s\n", Tnum - Texact);
     printf("T0 = %.16lf s\n",T0);
     printf("Texact/T0 = %.16lf\n\n", Texact/T0);
     return 0;
