@@ -30,7 +30,23 @@ int main(int argc, char *argv[])
     double Tnum, Texact;
 
     if (argc > 1)
+    {
         theta0_deg = atof(argv[1]);
+        if (theta0_deg < 0)
+            theta0_deg = -(theta0_deg);
+        if(theta0_deg > 180)
+        {
+            printf("Initial angle should be less than or equal to 180 degree\n");
+            printf("Type pendulum_time_period angle(in degree) L(optional) g(optional)\n");
+            return 0;
+        }
+        else if(theta0_deg == 0)
+        {
+            printf("Pendulum won't move\n");
+            printf("Type pendulum_time_period angle(in degree) L(optional) g(optional)\n");
+            return 0;
+        }
+    }
     if (argc > 2)
         L = atof(argv[2]);
     if (argc > 3)
