@@ -2,9 +2,9 @@ CC=gcc -Wall
 
 LIBS= -lblas -lm
 
-all: agm.o ellint.o pendulum_time_period.exe
+all: agm.o ellint.o pendulum_RK_time.o time_of_pendulum.exe
 
-pendulum_time_period.exe: pendulum_time_period.o ode.o ellint.o agm.o
+time_of_pendulum.exe: print_time.o pendulum_RK_time.o ellint.o agm.o ode.o
 	$(CC) -o $@ $+ $(LIBS)
 
 clean:
