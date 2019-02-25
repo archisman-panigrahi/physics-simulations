@@ -1,3 +1,5 @@
+This program generates the trajectory of a charge moving in perpenducular electric and magnetic fields. The motion of the charge is confined in the plane perpendicular to the magnetic field.
+
 ## Dependencies
 This is intended to be run in Unix based operating system.
 `BLAS` is required to run this program. `GCC` is needed to compile
@@ -69,3 +71,10 @@ For example, `./motion_of_charge.exe 0.05 100 1 2 1e4 5e3 1500 4` will correspon
 
 The motion will consist of loops.
 ![Loop](./screenshots/loop.png)
+
+## License
+This program is released under GNU GPLv3.
+## To do
+
+- 3D motion for 3D electric and magnetic field
+- Non-uniform fields
