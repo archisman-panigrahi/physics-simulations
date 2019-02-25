@@ -22,8 +22,8 @@ The parameters are, values of (in S.I. units) the following quantities in the fo
 
 If no option is given, the following default values are taken: 
 
-- `Magnetic Field along z axis` = 0.002,
-- `Electric field along y axis` = 40,
+- `Magnetic Field along z axis` = 0.002 (Tesla),
+- `Electric field along y axis` = 40 (Volt/meter),
 - `x(0)` = 0,
 - `y(0)` = 0,
 - `v_x(0)` = 0,
