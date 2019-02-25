@@ -31,7 +31,7 @@ int main(int argc, char const *argv[])
 	cy.charge = GSL_CONST_MKSA_ELECTRON_CHARGE;
 	cy.mass = GSL_CONST_MKSA_MASS_PROTON;
 	
-	int no_of_turns = 3;
+	double no_of_turns = 3;
 
 	double t, y[4], ynext[4], ws[10], yexact[2];
 	int idx, nSteps = 2000;
@@ -66,7 +66,7 @@ int main(int argc, char const *argv[])
 		nSteps = atof(argv[7]);
 	}
 	if (argc > 8){
-		no_of_turns = atoi(argv[8]);
+		no_of_turns = atof(argv[8]);
 	}
 	if (argc > 9){
 		cy.charge = atof(argv[9]);
