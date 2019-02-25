@@ -8,7 +8,7 @@ sudo apt install libopenblas-dev
 
 You can use GNU Octave to generate graphs
 
-`bash
+```bash
 sudo apt install octave
 ```
 
