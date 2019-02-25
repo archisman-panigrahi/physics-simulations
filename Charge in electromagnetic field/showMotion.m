@@ -6,7 +6,8 @@ function showMotion(fName)
     xExact = M(:, 4);
     yExact = M(:, 5);
 
-    % plot(xNum, yNum,'+k;numerical;', xExact, yExact,'-r;exact;','linewidth',0.5);
-    plot(xNum, yNum,'*k;numerical;');
+    plot(xNum, yNum,'xb;numerical;', xExact, yExact,'-r;exact;','linewidth',1);
     axis([min(xNum), max(xNum), min(yNum), max(yNum)]);
+    xlabel ("x position");
+    ylabel ("y position")
     grid on;
