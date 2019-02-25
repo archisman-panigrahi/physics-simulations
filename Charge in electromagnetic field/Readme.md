@@ -33,8 +33,8 @@ If no option is given, the following default values are taken:
 - `charge` = charge of proton,
 - `mass` = mass of proton
 
-3. You can open output.dat in any data plotting program. To see it in Octave, run `octave-cli`
-4. To generate the graph, run `showMotion('output.dat')`
+3. You can open output.dat in any data plotting program. To see it in Octave, run `octave-cli -q`
+4. To generate the graph, run `showMotion('output.dat')` within Octave.
 
 ## Examples
 
@@ -53,6 +53,7 @@ If no option is given, the following default values are taken:
 
 Now run Octave (as described in How to run section) to see the graphs.
 This gives rise to a cycloidal motion.
+![Cycloid](./screenshots/cycloid.png)
 
 ### Example 2
 For example, `./motion_of_charge.exe 0.05 100 1 2 1e4 5e3 1500 4` will correspond to 
@@ -67,3 +68,4 @@ For example, `./motion_of_charge.exe 0.05 100 1 2 1e4 5e3 1500 4` will correspon
 - `mass` = mass of proton (unaltered since no value is given)
 
 The motion will consist of loops.
+![Loop](./screenshots/loop.png)
