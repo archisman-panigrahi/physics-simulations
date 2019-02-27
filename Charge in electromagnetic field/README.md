@@ -16,8 +16,9 @@ sudo apt install octave
 
 ## How to use
 
+### Constant Field Motion
 1. To compile, run `make`
-2. Run `./motion_of_charge.exe [parameters]` (See examples)
+2. Run `./constant_field_motion.exe [parameters]` (See examples)
 
 By default it will save values to `output.dat`, whose columns are `time`, `numerical x`, `numerical y`, `exact x`, `exact y`.
 The parameters are, values of (in S.I. units) the following quantities in the following order `Magnetic Field along z axis`, `Electric field along y axis`, `x(0)`, `y(0)`, `v_x(0)`, `v_y(0)`, `no of iterations`, `no of turns`, `charge`, `mass`.
@@ -38,10 +39,10 @@ If no option is given, the following default values are taken:
 3. You can open output.dat in any data plotting program. To see it in Octave, run `octave-cli -q`
 4. To generate the graph, run `showMotion('output.dat')` within Octave.
 
-## Examples
+#### Examples
 
-### Example 1
-`./motion_of_charge.exe 0.005 100 0 0 0 0 500 5` will correspond to 
+##### Example 1
+`./constant_field_motion.exe 0.005 100 0 0 0 0 500 5` will correspond to 
 - `Magnetic Field along z axis` = 0.005 Tesla,
 - `Electric field along y axis` = 100 Volt/meter,
 - `x(0)` = 0,
@@ -57,8 +58,8 @@ Now run Octave (as described in How to run section) to see the graphs.
 This gives rise to a cycloidal motion.
 ![Cycloid](./screenshots/cycloid.png)
 
-### Example 2
-For example, `./motion_of_charge.exe 0.05 100 1 2 1e4 5e3 1500 4` will correspond to 
+##### Example 2
+For example, `./constant_field_motion.exe 0.05 100 1 2 1e4 5e3 1500 4` will correspond to 
 - `Magnetic Field along z axis` = 0.05 Tesla,
 - `Electric field along y axis` = 100 Volt/meter,
 - `x(0)` = 1 meter,
@@ -77,4 +78,4 @@ This program is released under GNU GPLv3.
 ## To do
 
 - 3D motion for 3D electric and magnetic field
-- Non-uniform fields
+- ~~Non-uniform fields~~ (Magnetron can handle this)
