@@ -73,9 +73,17 @@ For example, `./constant_field_motion.exe 0.05 100 1 2 1e4 5e3 1500 4` will corr
 The motion will consist of loops.
 ![Loop](./screenshots/loop.png)
 
+### Magnetron
+1. Compile
+2. run `./magnetron_motion.exe [parameters]`
+
+For example `./magnetron_motion.exe 5000` will produce the following graph, when `magnetron('magnetron.dat',0.01,0.03)` is run in Octave.
+
+![Magnetron](./screenshots/magnetron.png)
+
 ## License
 This program is released under GNU GPLv3.
 ## To do
 
 - 3D motion for 3D electric and magnetic field
-- ~~Non-uniform fields~~ (Magnetron can handle this)
+- ~~Non-uniform fields~~ (Implemented in Magnetron)
