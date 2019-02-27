@@ -8,7 +8,7 @@ int main(int argc, char const *argv[])
 	double V_0 = 24000, B_0 = 0.02, charge = GSL_CONST_MKSA_ELECTRON_CHARGE, 
 	mass = GSL_CONST_MKSA_MASS_ELECTRON, a = 0.01, b = 0.03, no_of_turns = 40,
 	x_0 = 0.01732050808, y_0 = 0, v_x_0 = 0, v_y_0 = 0;
-	int nSteps = 2000;
+	int nSteps = 5000;
 
 	if(argc > 1){
 		V_0 = atof(argv[1]);
