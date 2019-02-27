@@ -68,7 +68,7 @@ int main(int argc, char const *argv[])
 		cy.mass = atof(argv[10]);
 	}
 
-	cy.omega = fabs((cy.charge * cy.B_0)/cy.mass);
+	cy.omega = (cy.charge * cy.B_0)/cy.mass;
 	cy.vdrift = (cy.E_0)/(cy.B_0);
 
 	y[0] = x_0; //initial x coordinate
@@ -82,7 +82,7 @@ int main(int argc, char const *argv[])
 	FILE *datafile;
 	datafile=fopen("output.dat","w+");
 
-	double tStep = no_of_turns * 2 * (M_PI/cy.omega)/ nSteps;
+	double tStep = fabs(no_of_turns * 2 * (M_PI/cy.omega)/ nSteps);
 	
 	/* Quantities required for exact coordinates*/
 	double v_0 = hypot((v_x_0 - cy.vdrift),v_y_0);
