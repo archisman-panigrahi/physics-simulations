@@ -1,0 +1,9 @@
+./constant_field_motion.exe B_0 E_0 x_0 y_0 v_x_0 v_y_0 nSteps no_of_turns charge mass
+
+./magnetron_motion.exe V_0 B_0 a b x_0 y_0 v_x_0 v_y_0 nSteps no_of_turns charge mass
+
+Environment variables for magnetron
+V_0 B_0 a b x_0 y_0 v_x_0 v_y_0 nSteps turns charge mass
+
+Environment variables for constant_field_motion
+E_0 B_0 x_0 y_0 v_x_0 v_y_0 nSteps turns charge mass

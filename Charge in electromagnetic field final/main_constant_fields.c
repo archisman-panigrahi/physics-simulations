@@ -1,18 +1,51 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "gsl_const_mksa.h"
-#include "constant_field.h"
+#include "print_motion.h"
 
 int main(int argc, char const *argv[]) {
 
 	double no_of_turns = 3;
 	double x_0 = 0, y_0 = 0, v_x_0 = 0, v_y_0 = 0;
-	int nSteps = 2000;
+	int nSteps = 500;
 	double B_0 = 0.002;
 	double E_0 = 40;
 	double charge = GSL_CONST_MKSA_ELECTRON_CHARGE;
 	double mass = GSL_CONST_MKSA_MASS_PROTON;
+	char *epTxt;
+	/*get input using environment variables*/
+	epTxt = getenv("E_0");	
+	if (epTxt != NULL)
+		E_0 = atof(epTxt);
+	epTxt = getenv("B_0");
+	if (epTxt != NULL)
+		B_0 = atof(epTxt);
+	epTxt = getenv("x_0");
+	if (epTxt != NULL)
+		x_0 = atof(epTxt);
+	epTxt = getenv("y_0");
+	if (epTxt != NULL)
+		y_0 = atof(epTxt);
+	epTxt = getenv("v_x_0");
+	if (epTxt != NULL)
+		v_x_0 = atof(epTxt);
+	epTxt = getenv("v_y_0");
+	if (epTxt != NULL)
+		v_y_0 = atof(epTxt);
+	epTxt = getenv("nSteps");
+	if (epTxt != NULL)
+		nSteps = atoi(epTxt);
+	epTxt = getenv("turns");
+	if (epTxt != NULL)
+		no_of_turns = atof(epTxt);
+	epTxt = getenv("charge");
+	if (epTxt != NULL)
+		charge = atof(epTxt);
+	epTxt = getenv("mass");
+	if (epTxt != NULL)
+		mass = atof(epTxt);
 
+	/*Alternatively, usr argc*/
 	if(argc > 1){
 		B_0 = atof(argv[1]);
 	}

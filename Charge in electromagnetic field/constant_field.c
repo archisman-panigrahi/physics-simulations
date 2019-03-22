@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-#include "print_motion.h"
+#include "constant_field.h"
 #include "ode.h"
 
 typedef struct _CyclParams {
@@ -41,9 +41,9 @@ void print_motion(double E_0, double B_0, double charge, double mass,
 	y[2] = v_x_0; //initial v_x
 	y[3] = v_y_0; //initial v_y
 
-	printf("omega = %lf\n", cy.omega);
-	printf("drift velocity = %lf\n", cy.vdrift);
-	printf("radius = %lf\n", fabs((cy.mass * cy.vdrift)/(cy.charge * cy.B_0)));
+	printf("omega = %e\n", cy.omega);
+	printf("drift velocity = %e\n", cy.vdrift);
+	printf("radius = %e\n", fabs((cy.mass * cy.vdrift)/(cy.charge * cy.B_0)));
 	FILE *datafile;
 	datafile=fopen("output.dat","w+");
 

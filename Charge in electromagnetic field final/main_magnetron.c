@@ -5,10 +5,10 @@
 
 int main(int argc, char const *argv[])
 {
-	double V_0 = 2400, B_0 = 0.015, charge = GSL_CONST_MKSA_ELECTRON_CHARGE, 
+	double V_0 = -2400, B_0 = 0.015, charge = -GSL_CONST_MKSA_ELECTRON_CHARGE, 
 	mass = GSL_CONST_MKSA_MASS_ELECTRON, a = 0.01, b = 0.03, no_of_turns = 20,
 	x_0 = 0.01732050808, y_0 = 0, v_x_0 = 0, v_y_0 = 0;
-	int nSteps = 5000;
+	int nSteps = 2000;
 	char *epTxt;
 	/*get input using environment variables*/
 	epTxt = getenv("V_0");	
