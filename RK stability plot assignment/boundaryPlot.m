@@ -1,4 +1,4 @@
-function boundaryPlot(ord)
+function boundaryPlot(ord,N)
 	coefs = ones(ord+1,1);
 	for k=2:ord
 		ind = ord + 1 -k;
@@ -10,9 +10,8 @@ function boundaryPlot(ord)
 	% for which the above function has magnitude 1,
 	% i.e. it is of the form exp(i*theta) for some 
 	% theta.
-	
-	N = 501;
-	angs = linspace(-pi,pi,501);
+
+	angs = linspace(-pi,pi,N);
 	x = zeros(N * ord,1);
 	y = zeros(N * ord,1);
 	for k=1:N

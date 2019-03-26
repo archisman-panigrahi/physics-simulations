@@ -21,3 +21,4 @@ function areaPlot(xmin,xmax,ymin,ymax,M,N,ord)
 	colormap([0 0 0;0 1 0]);
 	image([xmin,xmax],[ymin,ymax],img);
 	axis('equal');
+	grid on;
