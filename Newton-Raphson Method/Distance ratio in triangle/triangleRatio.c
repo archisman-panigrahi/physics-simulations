@@ -3,6 +3,7 @@
 #include <cblas.h>
 #include <math.h>
 #include <stdio.h>
+#include "NewtonRaphson.h"
 
 typedef struct _TRIANGLE {
 	double xA;
@@ -35,13 +36,10 @@ void triangleRatio(double xA, double xB, double xC, double yA, double yB, double
 	x[0] = (xA + xB + xC)/3;//initial guess
 	x[1] = (yA + yB + yC)/3;
 	printf("x.init = %lf  y.init = %lf\n", x[0], x[1]);
-
-	double b[2], ipiv[2];
-	int m=2,n=2,nrhs=1,lda=2,ldb=2,info;
+	int n = 2, iter = 100;
 	double ws[4];
 
 	double h = 1e-8;
-	double jacob[4];
 
 	TRIANGLE tri;
 	tri.xA = xA;
@@ -54,17 +52,11 @@ void triangleRatio(double xA, double xB, double xC, double yA, double yB, double
 	tri.ratB = ratB;
 	tri.ratC = ratC;
 
-	for (int i = 0; i < 100; ++i)
-	{
-		(*fn)(x,2,&tri,b);
-		findNumericalJacobian(x, fn, h, m, n, ws, &tri, jacob);
-		dgesv_(&n,&nrhs,jacob,&lda,ipiv,b,&ldb,&info);
-		cblas_daxpy(n, -1, b, 1, x, 1);
-		printf("%d iteration x.sol = %lf y.sol = %lf\n", i+1, x[0], x[1] );
-	}
+	NewtonRaphson(x,fn,h,n,ws,iter,&tri);
+
 	printf("A(%lf,%lf)\t", tri.xA, tri.yA);
 	printf("B(%lf,%lf)\t", tri.xB, tri.yB);
-	printf("C(%lf,%lf)\n", tri.xC, tri.yC);
+	printf("C(%lf,%lf)\n\n", tri.xC, tri.yC);
 
 	printf("solution point P(%lf,%lf)\n",x[0],x[1]);
 
