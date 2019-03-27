@@ -1,13 +1,15 @@
-//Given fn, find findNumericalJacobian numerically
-// #include "findNumericalJacobian.h"
 #include <cblas.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+//move this line to jacobian.h
+void dgesv_(int *n,int *nrhs,double *jacob,int *lda,double *ipiv,double *b,int *ldb,int *info);
+
+
 void fn(double *x, int m, void *ud, double *s_out)
 {
-	s_out[0] = x[0]*x[1] - 1;
-	s_out[1] = x[0] - x[1] - 1.5;
+	s_out[0] = x[0]*x[0] + x[1]*x[1] - 1;
+	s_out[1] = x[0] - 2*x[1];
 }
 
 /*
@@ -20,10 +22,13 @@ dfm/dx1 .........	dfn/dxn
 void findNumericalJacobian(double *x, void (*f)(double *x, int m, void *ud,double *s_out),
             double h,int m, int n, double *ws, void *udat, double *s_store)
 {
-	double high[m];//if this gives any error when put into
-	//another file, use malloc
-	double low[m];
+	double *high;
+	double *low;
+	high = ws;
+	low = ws + m;
 	int i,j;
+	/* This function numerically finds Jacobian
+	by using df/dx = (f(x+h) - f(x-h))/(2*h)*/
 	for (i = 0; i < n; ++i)
 	{
 		x[i] += h;
@@ -50,13 +55,13 @@ typedef struct _TRIANGLE {
     double ratC;
 } TRIANGLE;
 
-void print_matrix(double **a,int m,int n)
+void print_matrix(double *a,int m,int n)
 {
 	for (int i = 0; i < m; ++i)
 	{
 		for (int j = 0; j < n; ++j)
 		{
-			printf("%lf  ", a[i][j]);
+			printf("%lf  ", a[i*n+j]);
 		}
 		printf("\n");
 	}
@@ -68,10 +73,12 @@ int main(int argc, char const *argv[])
 	TRIANGLE triangle;
 	int i; //variable to be used in for loops
 	int m=2,n=2; //size of function matrix and size of x(input) matrix
-	double ws[50];
+
+	double *ws;
+	ws = (double *) malloc(sizeof(double) * (3*m)); //so far 2*m is enough
 	double x[n];
-	x[0] = 1.5;
-	x[1] = 0.7;
+	x[0] = 0.5;
+	x[1] = 0.5;
 
 	double h = 1e-8;
 
@@ -85,12 +92,12 @@ int main(int argc, char const *argv[])
 	(*fn)(x,m,&triangle,b);
 
 	int nrhs=1,lda=n,ldb=n,info; //don't put ldb = 1;
-	double a[1];
-	a[0] = 3;
+
 	for (i = 0; i < 10; ++i)
 	{
 		(*fn)(x,m,&triangle,b);
 		findNumericalJacobian(x, fn, h, m, n, ws, &triangle, jacob);
+		//print_matrix(jacob,m,n);
 		dgesv_(&n,&nrhs,jacob,&lda,ipiv,b,&ldb,&info);
 		cblas_daxpy(n, -1, b, 1, x, 1);
 
