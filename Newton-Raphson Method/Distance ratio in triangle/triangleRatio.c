@@ -1,6 +1,4 @@
 #include "triangleRatio.h"
-#include "jacobian.h"
-#include <cblas.h>
 #include <math.h>
 #include <stdio.h>
 #include "NewtonRaphson.h"
