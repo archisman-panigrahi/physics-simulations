@@ -35,11 +35,12 @@ void triangleRatio(double xA, double xB, double xC, double yA, double yB, double
 	double x[2];
 	x[0] = (xA + xB + xC)/3;//initial guess
 	x[1] = (yA + yB + yC)/3;
-	printf("x.init = %lf  y.init = %lf\n", x[0], x[1]);
-	int n = 2, iter = 100;
+	//printf("x.init = %lf  y.init = %lf\n", x[0], x[1]);
+	int n = 2, iter = 30;
 	double ws[4];
-
+	double tolerance = 1e-6;
 	double h = 1e-8;
+
 
 	TRIANGLE tri;
 	tri.xA = xA;
@@ -52,12 +53,22 @@ void triangleRatio(double xA, double xB, double xC, double yA, double yB, double
 	tri.ratB = ratB;
 	tri.ratC = ratC;
 
-	NewtonRaphson(x,fn,h,n,ws,iter,&tri);
-
+	printf("Input:\n");
 	printf("A(%lf,%lf)\t", tri.xA, tri.yA);
 	printf("B(%lf,%lf)\t", tri.xB, tri.yB);
 	printf("C(%lf,%lf)\n\n", tri.xC, tri.yC);
 
+	int success = NewtonRaphson(x,fn,h,n,ws,iter,&tri,tolerance);
+	if (success == 0)
+	{
+		printf("Does not converge upto 6 decimal place after %d iterations\n",iter);
+	}
+	if (success == 1)
+	{
+		printf("Converges to at least 6 decimal places\n\n");
+	}
+
+	printf("Output:\n");
 	printf("solution point P(%lf,%lf)\n",x[0],x[1]);
 
 	double AP = findDistance(xA,x[0],yA,x[1]), BP = findDistance(xB,x[0],yB,x[1]), CP = findDistance(xC,x[0],yC,x[1]);
