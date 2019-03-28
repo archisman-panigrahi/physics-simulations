@@ -2,14 +2,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-//move this line to jacobian.h
-void dgesv_(int *n,int *nrhs,double *jacob,int *lda,double *ipiv,double *b,int *ldb,int *info);
-
+#include<lapacke.h>
 
 void fn(double *x, int m, void *ud, double *s_out)
 {
-	s_out[0] = x[0]*x[0] + x[1]*x[1] - 1;
-	s_out[1] = x[0] - 2*x[1];
+	s_out[0] = x[1] - (x[0]*x[0]);
+	s_out[1] = x[1] - exp(x[0]);
 }
 
 /*
@@ -77,31 +75,30 @@ int main(int argc, char const *argv[])
 	double *ws;
 	ws = (double *) malloc(sizeof(double) * (3*m)); //so far 2*m is enough
 	double x[n];
-	x[0] = 0.5;
-	x[1] = 0.5;
-
+	x[0] = -1;
+	x[1] = 1;
+	printf("Initial Guess\t");
+	print_matrix(x,1,n);
+	printf("\n");
 	double h = 1e-8;
 
 	double *jacob;
 	jacob = (double *) malloc(sizeof(double) * (m*n));
 
-	findNumericalJacobian(x, fn, h, m, n, ws, &triangle, jacob);
 
-	double b[n], ipiv[n];
+	double b[n];
+	int ipiv[n];
 
-	(*fn)(x,m,&triangle,b);
-
-	int nrhs=1,lda=n,ldb=n,info; //don't put ldb = 1;
+	int nrhs=1,lda=n,ldb=1,info; //don't put ldb = 1; 
 
 	for (i = 0; i < 10; ++i)
 	{
 		(*fn)(x,m,&triangle,b);
 		findNumericalJacobian(x, fn, h, m, n, ws, &triangle, jacob);
-		//print_matrix(jacob,m,n);
-		dgesv_(&n,&nrhs,jacob,&lda,ipiv,b,&ldb,&info);
+		LAPACKE_dgesv(LAPACK_ROW_MAJOR,n,nrhs,jacob,lda,ipiv,b,ldb);
 		cblas_daxpy(n, -1, b, 1, x, 1);
-
-		printf("%lf	%lf\n", x[0], x[1]);
+		printf("iteration %d\t", i+1);
+		print_matrix(x,1,n);
 	}
 	return 0;
 }
