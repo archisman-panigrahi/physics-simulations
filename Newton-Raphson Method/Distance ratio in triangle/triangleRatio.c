@@ -71,6 +71,6 @@ void triangleRatio(double xA, double xB, double xC, double yA, double yB, double
 
 	double AP = findDistance(xA,x[0],yA,x[1]), BP = findDistance(xB,x[0],yB,x[1]), CP = findDistance(xC,x[0],yC,x[1]);
 	printf("AP = %lf, BP = %lf, CP = %lf\n", AP, BP, CP);
-	printf("AP/ratA = %lf, BP/ratB = %lf, CP/ratC = %lf\n", (AP/ratA), (BP/ratB), (CP/ratC));
+	printf("AP/%lf = %lf, BP/%lf = %lf, CP/%lf = %lf\n", ratA, (AP/ratA), ratB, (BP/ratB), ratC, (CP/ratC));
 
 }
