@@ -9,9 +9,6 @@ int NewtonRaphson(double *x,
 	double h, int n, double *ws, int iter, void *udat, double tolerance);
 
 double normVector(double *b, int n);
-
-void dgesv_(int *n,int *nrhs,double *jacob,
-	int *lda,double *ipiv,double *b,int *ldb,int *info);
 #ifdef __cplusplus
 }
 #endif
