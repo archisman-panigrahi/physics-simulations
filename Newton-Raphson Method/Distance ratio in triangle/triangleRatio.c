@@ -59,7 +59,7 @@ void triangleRatio(double xA, double xB, double xC, double yA, double yB, double
 	int success = NewtonRaphson(x,fn,h,n,ws,iter,&tri,tolerance);
 	if (success == 0)
 	{
-		printf("Does not converge upto 6 decimal place after %d iterations\n",iter);
+		printf("Does not converge upto 6 decimal place after %d iterations\n\n",iter);
 	}
 	if (success == 1)
 	{
