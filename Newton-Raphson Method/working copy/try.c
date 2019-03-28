@@ -75,8 +75,8 @@ int main(int argc, char const *argv[])
 	double *ws;
 	ws = (double *) malloc(sizeof(double) * (3*m)); //so far 2*m is enough
 	double x[n];
-	x[0] = -1;
-	x[1] = 1;
+	x[0] = 1;
+	x[1] = 4;
 	printf("Initial Guess\t");
 	print_matrix(x,1,n);
 	printf("\n");
@@ -85,17 +85,25 @@ int main(int argc, char const *argv[])
 	double *jacob;
 	jacob = (double *) malloc(sizeof(double) * (m*n));
 
-
+	int iter=10;
+	if(argc > 1)
+		iter = atoi(argv[1]);
 	double b[n];
 	int ipiv[n];
 
-	int nrhs=1,lda=n,ldb=1,info; //don't put ldb = 1; 
+	int nrhs=1,lda=n,ldb=1,info;
 
-	for (i = 0; i < 10; ++i)
+	for (i = 0; i < iter; ++i)
 	{
 		(*fn)(x,m,&triangle,b);
 		findNumericalJacobian(x, fn, h, m, n, ws, &triangle, jacob);
+		//printf("Function F\n");
+		//print_matrix(b,1,n);
+		//printf("Jacobian\n");
+		//print_matrix(jacob,n,n);
 		LAPACKE_dgesv(LAPACK_ROW_MAJOR,n,nrhs,jacob,lda,ipiv,b,ldb);
+		//printf("JinvF\n");
+		//print_matrix(b,1,n);
 		cblas_daxpy(n, -1, b, 1, x, 1);
 		printf("iteration %d\t", i+1);
 		print_matrix(x,1,n);
