@@ -77,7 +77,7 @@ void triangleRatio(double latA, double latB, double latC, double longA, double l
 	tri.ratB = ratB;
 	tri.ratC = ratC;
 
-	int success = NewtonRaphson(x,fn,h,n,ws,iter,&tri,tolerance);
+	int success = NewtonRaphson(x,fn,h,n,ws,&iter,&tri,tolerance);
 
 	if (success == 0)
 	{
@@ -85,17 +85,17 @@ void triangleRatio(double latA, double latB, double latC, double longA, double l
 	}
 	if (success == 1)
 	{
-		printf("Converges to at least 6 decimal places\n\n");
+		printf("Converges to at least 6 decimal places after %d iterations\n\n", iter);
 	}
 
 	printf("Output:\n");
 	printf("solution point P(%lf,%lf)\n",(180/M_PI)*x[0],(180/M_PI)*x[1]);
 
-	double AP = (180/M_PI)*findDistance(latA,x[0],longA,x[1]);
-	double BP = (180/M_PI)*findDistance(latB,x[0],longB,x[1]);
-	double CP = (180/M_PI)*findDistance(latC,x[0],longC,x[1]);
+	double AP = 6371*findDistance(latA,x[0],longA,x[1]);
+	double BP = 6371*findDistance(latB,x[0],longB,x[1]);
+	double CP = 6371*findDistance(latC,x[0],longC,x[1]);
 
-	printf("AP = %lf, BP = %lf, CP = %lf\n", AP, BP, CP);
+	printf("AP = %lf KM, BP = %lf KM, CP = %lf KM\n", AP, BP, CP);
 	printf("AP/%lf = %lf, BP/%lf = %lf, CP/%lf = %lf\n", ratA, (AP/ratA), ratB, (BP/ratB), ratC, (CP/ratC));
 
 }
