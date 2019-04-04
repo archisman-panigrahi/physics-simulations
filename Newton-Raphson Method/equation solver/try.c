@@ -6,8 +6,8 @@
 
 void fn(double *x, int m, void *ud, double *s_out)
 {
-	s_out[0] = x[1] - (x[0]*x[0]);
-	s_out[1] = x[1] - exp(x[0]);
+	s_out[0] = sin(x[0]) * cosh(x[1]) - 0.9 * x[0];
+	s_out[1] = cos(x[0]) * sinh(x[1]) - 1.1 * x[1];
 }
 
 /*
@@ -75,11 +75,9 @@ int main(int argc, char const *argv[])
 	double *ws;
 	ws = (double *) malloc(sizeof(double) * (3*m)); //so far 2*m is enough
 	double x[n];
-	x[0] = 1;
-	x[1] = 4;
-	printf("Initial Guess\t");
-	print_matrix(x,1,n);
-	printf("\n");
+	x[0] = 7.4;
+	x[1] = 2.8;
+
 	double h = 1e-8;
 
 	double *jacob;
@@ -88,6 +86,9 @@ int main(int argc, char const *argv[])
 	int iter=10;
 	if(argc > 1)
 		iter = atoi(argv[1]);
+	printf("Initial Guess\t");
+	print_matrix(x,1,n);
+	printf("\n");
 	double b[n];
 	int ipiv[n];
 
@@ -97,13 +98,13 @@ int main(int argc, char const *argv[])
 	{
 		(*fn)(x,m,&triangle,b);
 		findNumericalJacobian(x, fn, h, m, n, ws, &triangle, jacob);
-		//printf("Function F\n");
-		//print_matrix(b,1,n);
-		//printf("Jacobian\n");
-		//print_matrix(jacob,n,n);
+		printf("Function F\n");
+		print_matrix(b,1,n);
+		printf("Jacobian\n");
+		print_matrix(jacob,n,n);
 		LAPACKE_dgesv(LAPACK_ROW_MAJOR,n,nrhs,jacob,lda,ipiv,b,ldb);
-		//printf("JinvF\n");
-		//print_matrix(b,1,n);
+		printf("JinvF\n");
+		print_matrix(b,1,n);
 		cblas_daxpy(n, -1, b, 1, x, 1);
 		printf("iteration %d\t", i+1);
 		print_matrix(x,1,n);
