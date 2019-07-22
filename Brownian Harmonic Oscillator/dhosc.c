@@ -34,7 +34,7 @@ void dhosc_motion(double omega, double gamma, double squeeze,
 
 	y[0] = x_0; //initial theta coordinate
 	y[1] = v_0; //initial v_theta coordinate
-
+	double x, v;
 
 	FILE *datafile;
 	datafile = fopen("output.dat","w+");
@@ -47,7 +47,11 @@ void dhosc_motion(double omega, double gamma, double squeeze,
 		t += tStep;
 		y[0] = ynext[0];
 		y[1] = ynext[1];
-		fprintf(datafile, "%lf\t%lf\t%lf\t%lf\t%lf\n", t, y[0], y[1], (omega * omega) * (y[0]*y[0])/2, (y[1]*y[1])/2);
-		//fprintf(datafile, "%lf\t%lf\t%lf\t%lf\t%lf\n", t, y[0], y[1], (omega * omega) * (y[0]*cos(omega*t) - y[1]*sin(omega*t)) *(y[0]*cos(omega*t) - y[1]*sin(omega*t))/2, (y[1]*y[1])/2);
+		x = (y[0] * sqrt(omega));
+		v = (y[1] / sqrt(omega));
+		//fprintf(datafile, "%lf\t%lf\t%lf\t%lf\t%lf\n", t, y[0], y[1], (omega * omega) * (y[0]*y[0])/2, (y[1]*y[1])/2);
+		fprintf(datafile, "%lf\t%lf\t%lf\t%lf\t%lf\n", t, y[0], y[1],
+			( (x * cos(omega*t)) - (v * sin(omega*t)) ) * ( (x * cos(omega*t)) - (v * sin(omega*t)) )/2,
+		    ( (v * cos(omega*t)) + (x * sin(omega*t)) ) * ( (v * cos(omega*t)) + (x * sin(omega*t)) )/2);
 	}
 }
