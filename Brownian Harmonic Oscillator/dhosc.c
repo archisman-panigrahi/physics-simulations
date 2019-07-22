@@ -15,7 +15,7 @@ void fn(double t, double *u, int m, void *udat, double *s_out) {
 	//x'' = - omega^2 * x - gamma * v + random(t)
 	s_out[0] = u[1];
 	s_out[1] = -(osc->omega * osc->omega) * u[0] - osc->gamma * u[1] 
-				+ 20 * ((osc->squeeze * sin(osc->omega * t) * gaussrand() 
+				+ 1000 * ((osc->squeeze * sin(osc->omega * t) * gaussrand() 
 				+ (1/osc->squeeze) * cos(osc->omega * t) * gaussrand())); //squeezed reservoir
 	//s_out[1] = -(osc->omega * osc->omega) * u[0] - osc->gamma * u[1] + 20 * gaussrand(); pure thermal reservoir
 }
@@ -37,7 +37,7 @@ void dhosc_motion(double omega, double gamma, double squeeze,
 	double x, v;
 
 	FILE *datafile;
-	datafile = fopen("output.dat","w+");
+	datafile = fopen("output.csv","w+");
 
 	double tStep = (finalTime/nSteps);
 	/* Print in for loop*/
@@ -50,7 +50,7 @@ void dhosc_motion(double omega, double gamma, double squeeze,
 		x = (y[0] * sqrt(omega));
 		v = (y[1] / sqrt(omega));
 		//fprintf(datafile, "%lf\t%lf\t%lf\t%lf\t%lf\n", t, y[0], y[1], (omega * omega) * (y[0]*y[0])/2, (y[1]*y[1])/2);
-		fprintf(datafile, "%lf\t%lf\t%lf\t%lf\t%lf\n", t, y[0], y[1],
+		fprintf(datafile, "%lf,%lf,%lf,%lf,%lf\n", t, y[0], y[1],
 			omega * ( (x * cos(omega*t)) - (v * sin(omega*t)) ) * ( (x * cos(omega*t)) - (v * sin(omega*t)) )/2,
 		    omega * ( (v * cos(omega*t)) + (x * sin(omega*t)) ) * ( (v * cos(omega*t)) + (x * sin(omega*t)) )/2);
 	}

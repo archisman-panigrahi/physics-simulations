@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "dhosc.h"
-#include <time.h>
+#include <time.h>	
+
 int main(int argc, char const *argv[])
 {
 	double omega = 10, gamma = 0.1, squeeze = 0.4;
@@ -39,8 +40,7 @@ int main(int argc, char const *argv[])
 	printf("squeezing parameter = %lf\n", squeeze);
 	printf("nSteps = %d\n", nSteps);
 	printf("totalTime = %lf\n", finalTime);
-
 	dhosc_motion(omega, gamma, squeeze, x_0, v_0, nSteps, finalTime);
-
+	system("octave-cli showMotion.m");
 	return 0;
 }

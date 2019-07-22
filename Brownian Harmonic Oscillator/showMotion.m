@@ -1,6 +1,6 @@
-function showMotion(fName)
+function showMotion()
 
-    M = load(fName);
+    M = csvread('output.csv');
     t = M(:, 1);
     position = M(:, 2);
     velocity = M(:, 3);
@@ -22,3 +22,4 @@ function showMotion(fName)
     xlabel ("time (s)");
     ylabel ("Energy (J)");
     grid on;
+    pause()

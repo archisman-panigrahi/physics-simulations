@@ -9,4 +9,4 @@ dhosc.exe: main_dhosc.o dhosc.o ode.o random.o
 clean:
 	rm *.o *.exe
 scrub:
-	rm *.dat
+	rm *.dat *.txt *.csv
