@@ -38,7 +38,7 @@ void dhosc_motion(double omega, double gamma, double squeeze,
 
 	FILE *datafile;
 	datafile = fopen("output.csv","w+");
-
+	fprintf(datafile, "r,%lf\n", squeeze);
 	double tStep = (finalTime/nSteps);
 	/* Print in for loop*/
 	for (idx = 0; idx < nSteps; idx++)
