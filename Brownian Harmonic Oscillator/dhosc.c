@@ -40,6 +40,12 @@ void dhosc_motion(double omega, double gamma, double squeeze,
 	datafile = fopen("output.csv","w+");
 	fprintf(datafile, "r,%lf\n", squeeze);
 	double tStep = (finalTime/nSteps);
+
+	double Energy_rot_1 = 0;
+	double Energy_rot_2 = 0;
+
+	double Energy_1 = 0;
+	double Energy_2 = 0;
 	/* Print in for loop*/
 	for (idx = 0; idx < nSteps; idx++)
 	{
@@ -49,9 +55,29 @@ void dhosc_motion(double omega, double gamma, double squeeze,
 		y[1] = ynext[1];
 		x = (y[0] * sqrt(omega));
 		v = (y[1] / sqrt(omega));
+
+		Energy_rot_1 += (omega * ( (x * cos(omega*t)) - (v * sin(omega*t)) ) * ( (x * cos(omega*t)) - (v * sin(omega*t)) )/2)/nSteps;
+		Energy_rot_2 += (omega * ( (v * cos(omega*t)) + (x * sin(omega*t)) ) * ( (v * cos(omega*t)) + (x * sin(omega*t)) )/2)/nSteps;
+
+		Energy_1 += omega * x * x/nSteps;
+		Energy_2 += omega * v * v/nSteps;
 		//fprintf(datafile, "%lf\t%lf\t%lf\t%lf\t%lf\n", t, y[0], y[1], (omega * omega) * (y[0]*y[0])/2, (y[1]*y[1])/2);
-		fprintf(datafile, "%lf,%lf,%lf,%lf,%lf\n", t, y[0], y[1],
-			omega * ( (x * cos(omega*t)) - (v * sin(omega*t)) ) * ( (x * cos(omega*t)) - (v * sin(omega*t)) )/2,
-		    omega * ( (v * cos(omega*t)) + (x * sin(omega*t)) ) * ( (v * cos(omega*t)) + (x * sin(omega*t)) )/2);
+		fprintf(datafile, "%lf,%lf,%lf,%lf,%lf,%lf,%lf\n", t, y[0], y[1],
+			omega * ( (x * cos(omega*t)) - (v * sin(omega*t)) ) * ( (x * cos(omega*t)) - (v * sin(omega*t)) )/2, //rotating_energy_1
+		    omega * ( (v * cos(omega*t)) + (x * sin(omega*t)) ) * ( (v * cos(omega*t)) + (x * sin(omega*t)) )/2, //rotating_energy_2
+		    omega * x * x, //Energy in position
+		    omega * v * v); //Energy in velocity
 	}
+	
+	FILE *details;
+	details = fopen("details.csv", "w+");
+	fprintf(details, "r, %lf\n", squeeze);
+	fprintf(details,"Energy in first rotating quadrature, %lf\n", Energy_rot_1);
+	fprintf(details,"Energy in second rotating quadrature, %lf\n", Energy_rot_2);
+	fprintf(details,"Total Energy, %lf\n", (Energy_rot_1 + Energy_rot_2));
+	fprintf(details,"Experimental ratio, %lf\n", (Energy_rot_1/Energy_rot_2));
+	fprintf(details,"Ratio predicted by me, %lf\n", (2*cosh(2*squeeze) + sinh(2*squeeze))/(2*cosh(2*squeeze) - sinh(2*squeeze)));
+	fprintf(details,"Ratio predicted by paper, %lf\n", exp(4*squeeze));
+	fprintf(details,"Energy in position, %lf\n", Energy_1);
+	fprintf(details,"Energy in momentum, %lf\n", Energy_2);
 }

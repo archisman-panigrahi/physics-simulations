@@ -9,7 +9,6 @@ int main(int argc, char const *argv[])
 	double x_0 = 0.1, v_0 = -1;
 	int nSteps = 5000;
 	double finalTime = 10;
-	int showGraph = 0;
 	srand(time(0));
 	if(argc > 1){
 		x_0 = atof(argv[1]);
@@ -32,9 +31,6 @@ int main(int argc, char const *argv[])
 	if(argc > 7){
 		finalTime = atof(argv[7]);
 	}
-	if(argc > 8){
-		showGraph = atoi(argv[8]);
-	}
 
 	printf("use dhosc.exe x_0 v_0 omega gamma squeeze nSteps totalTime\n");
 	printf("x_0 = %lf\n", x_0);
@@ -45,10 +41,5 @@ int main(int argc, char const *argv[])
 	printf("nSteps = %d\n", nSteps);
 	printf("totalTime = %lf\n", finalTime);
 	dhosc_motion(omega, gamma, squeeze, x_0, v_0, nSteps, finalTime);
-	if (showGraph != 0)
-	{
-		printf("Showing graph\n");
-		system("octave-cli showMotion.m");
-	}
 	return 0;
 }
