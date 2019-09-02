@@ -15,8 +15,8 @@ sudo apt install octave
 ## How to use
 
 1. To compile, run `make`
-2. Run `./inverted_pendulum_motion.exe (optional parameters)` (See examples)
-The parameters are `theta_0 v_theta_0 omega nSteps totalTime a g l`
+2. Run `./dhosc.exe (optional parameters)` (See examples)
+The parameters are `x_0 v_0 omega gamma squeeze nSteps totalTime`
 
 3. You can open output.dat in any data plotting software. To see it in Octave, run `octave-cli -q`
-4. To generate the graph, run `showMotion('output.dat')` within Octave.
+4. To generate the graph, run `showMotion` within Octave.
