@@ -15,7 +15,7 @@ sudo apt install octave
 ## How to use
 
 1. To compile, run `make`
-2. Run `./dhosc.exe (optional parameters)` (See examples)
+2. Run `./dhosc.exe "optional parameters"` (without the quotes)
 The parameters are `x_0 v_0 omega gamma squeeze nSteps totalTime`
 
 3. You can open output.dat in any data plotting software. To see it in Octave, run `octave-cli -q`
