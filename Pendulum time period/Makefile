@@ -1,6 +1,6 @@
 CC=gcc -Wall
 
-LIBS= -lblas -lm
+LIBS= -lcblas -lm
 
 all: agm.o ellint.o pendulum_RK_time.o time_of_pendulum.exe
 

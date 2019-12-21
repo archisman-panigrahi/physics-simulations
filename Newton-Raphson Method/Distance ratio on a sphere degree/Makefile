@@ -1,6 +1,6 @@
 CC=gcc -Wall
 
-LIBS= -lblas -lm -llapacke
+LIBS= -lcblas -lm -llapacke
 
 all: jacobian.o distanceRatio.o drEarth.exe NewtonRaphson.o
 

@@ -1,6 +1,6 @@
 CC=gcc -Wall
 
-LIBS= -lblas -lm -llapacke
+LIBS= -lcblas -lm -llapacke
 
 all: jacobian.o triangleRatio.o main.exe NewtonRaphson.o
 

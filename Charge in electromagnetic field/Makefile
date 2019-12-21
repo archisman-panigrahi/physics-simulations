@@ -1,6 +1,6 @@
 CC = gcc -Wall
 
-LIBS = -lm -lblas
+LIBS = -lm -lcblas
 
 all: constant_field_motion.exe magnetron_motion.exe
 

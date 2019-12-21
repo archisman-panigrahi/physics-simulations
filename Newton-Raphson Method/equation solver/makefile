@@ -1,6 +1,6 @@
 all: t.exe
 
 t.exe: try.o
-	gcc -o $@ $+ -lm -lblas -llapacke
+	gcc -o $@ $+ -lm -lcblas -llapacke
 clean:
 	rm *.exe *.o
