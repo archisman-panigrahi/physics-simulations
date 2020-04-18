@@ -1,7 +1,19 @@
 % define before calling
-% m = 3, n = 3, p = 3;
-t_x =0.1;
-output_precision(6)
+if ~exist('m','var')
+	m = 8;
+end
+if ~exist('n','var')
+	n = 8;
+end
+if ~exist('p','var')
+	p = 8;
+end
+if ~exist('t_x','var')
+	t_x = 0.1;
+end
+
+%Show the values
+m,n,p,t_x
 % A point is represented by coordinates (i,k,l)
 % In 2D, (i,k) is mapped to (k-1)*m + i, where k varies from 1 to n, and i from 1 to m
 % In 3D, (i,k,l) is mapped to (l-1)*m*n + (k-1) * m + i, where l varies from 1 to p, k from 1 to n, i from 1 to m
