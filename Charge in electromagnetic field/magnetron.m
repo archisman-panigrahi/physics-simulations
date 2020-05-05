@@ -13,3 +13,4 @@ function magnetron(fName,a,b)
     xlabel ("x position");
     ylabel ("y position");
     grid on;
+    axis equal;
