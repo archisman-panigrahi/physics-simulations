@@ -3,7 +3,7 @@ This is intended to be run in Unix based operating system.
 `BLAS` is required to run this program. `GCC` is needed to compile
 Use the following commands to install it in Debian based systems.
 ```bash
-sudo apt install libopenblas-dev gcc
+sudo apt install libopenblas-dev gcc libatlas-base-dev
 ```
 
 You can use GNU Octave to generate graphs
