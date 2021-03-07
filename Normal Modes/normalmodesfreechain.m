@@ -23,5 +23,8 @@ function normalmodesfreechain(N)
 		end
 	end
 	A
-	disp('Eigenvalues'),sqrt(transpose(eig(A)))
+	disp('Eigenvalues'),num_eigval=sqrt(transpose(eig(A)))
 	disp('Guessed formula'),eigenmatrix
+
+	plot(linspace(1,N,N),eigenmatrix,"*;guess;r","color","r",linspace(1,N,N),num_eigval,"x;numeric;r","color","b")
+	legend("location","southeast")
